@@ -405,6 +405,7 @@ const getHintsForTopic = (question) => {
       "Binary search is efficient on sorted arrays; remember to check for the middle element.",
       "A Hash Map helps to store key-value pairs for quick lookups in O(1) time.",
       "The two-pointer technique is great for problems like finding pairs that sum to a target.",
+      "Remember to handle edge cases like empty arrays and null values when manipulating arrays.",
     ];
   } else if (lowerCaseQuestion.includes("linked list")) {
     return [
@@ -412,6 +413,7 @@ const getHintsForTopic = (question) => {
       "To reverse a linked list, keep track of the previous node while traversing.",
       "Detecting cycles in a linked list can be done using Floyd's Tortoise and Hare algorithm.",
       "Doubly linked lists allow for easier backward traversal but require more memory.",
+      "Inserting at the head or tail of a linked list requires different pointer adjustments.",
     ];
   } else if (lowerCaseQuestion.includes("tree")) {
     return [
@@ -419,6 +421,7 @@ const getHintsForTopic = (question) => {
       "BFS explores level by level, which is useful for finding the shortest path in unweighted graphs.",
       "A Binary Search Tree allows for faster searches, insertions, and deletions.",
       "Balance the tree to avoid skewed structure that could degrade performance.",
+      "When implementing a tree, ensure that each node has both left and right child pointers.",
     ];
   } else if (lowerCaseQuestion.includes("recursion")) {
     return [
@@ -426,6 +429,7 @@ const getHintsForTopic = (question) => {
       "Stack overflow happens when the recursion goes too deep without a base case.",
       "Memoization stores previously computed results, speeding up recursive functions.",
       "Think of recursion as dividing a problem into smaller subproblems that are easier to solve.",
+      "Check if the recursive call is reaching the base case in each iteration to avoid infinite recursion.",
     ];
   } else if (lowerCaseQuestion.includes("time complexity")) {
     return [
@@ -433,14 +437,15 @@ const getHintsForTopic = (question) => {
       "O(n) means the algorithm's time grows linearly with input size.",
       "O(log n) is faster than O(n) for large inputs. It’s often seen in binary search.",
       "Consider both time and space complexity to optimize your solution.",
+      "For algorithms with multiple loops, calculate the time complexity of each loop and combine them.",
     ];
   }
 
-  // Add fallback generic hints if no specific match is found
+  // Always provide relevant hints matching to the question context
   return [
-    "Break the problem down into smaller steps. This simplifies complex problems.",
-    "Always test your solution with edge cases to ensure robustness.",
-    "Start with a brute-force approach, then look for optimization opportunities.",
-    "Look at the problem from different perspectives, it may reveal new solutions.",
+    "When solving coding problems, always consider edge cases that might break your logic.",
+    "Make sure your solution is scalable. Think about the time and space complexity before finalizing your approach.",
+    "Use debugging tools like console logs or breakpoints to trace the flow of your program.",
+    "Test your solution on multiple inputs to ensure it works under all possible conditions.",
   ];
 };
