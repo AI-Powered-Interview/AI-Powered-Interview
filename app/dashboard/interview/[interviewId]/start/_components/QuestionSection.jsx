@@ -214,7 +214,7 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   // Automatically speak the question when it becomes visible
   useEffect(() => {
     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
-      textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
+      textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question);
     }
     setShowHint(false); // Close the hint dropdown when the question changes
   }, [mockInterviewQuestion, activeQuestionIndex]);
@@ -267,12 +267,16 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
           {showHint && (
             <div className="mt-2 p-3 bg-white border rounded shadow-md">
               <ul className="text-sm">
-                {mockInterviewQuestion[activeQuestionIndex]?.Keywords?.map(
-                  (keyword, index) => (
-                    <li key={index} className="text-gray-700">
-                      {keyword}
-                    </li>
+                {mockInterviewQuestion[activeQuestionIndex]?.Keywords?.length > 0 ? (
+                  mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+                    (keyword, index) => (
+                      <li key={index} className="text-gray-700">
+                        {keyword}
+                      </li>
+                    )
                   )
+                ) : (
+                  <li className="text-gray-700">No hints available.</li>
                 )}
               </ul>
             </div>
