@@ -215,7 +215,6 @@
 // };
 
 // export default QuestionSection;
-
 import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -239,8 +238,9 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     setShowHint(false); // Close the hint dropdown when the question changes
   }, [mockInterviewQuestion, activeQuestionIndex]);
 
-  const toggleHint = () => {
-    setShowHint(!showHint);
+  const toggleHint = (event) => {
+    event.preventDefault(); // Prevent any unintended navigation
+    setShowHint((prev) => !prev); // Toggle hint visibility
   };
 
   return (
@@ -277,7 +277,10 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
             }
           />
           {/* Hint Lightbulb */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={toggleHint}>
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={toggleHint}
+          >
             <Lightbulb className="text-yellow-500" />
             <span className="text-sm font-medium">Hint</span>
           </div>
