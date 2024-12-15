@@ -420,55 +420,55 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     // Return hints based on the keywords in the question
     if (lowerCaseQuestion.includes("javascript")) {
       return [
-        "Closures help with managing function scope and state.",
-        "The event loop and call stack are fundamental to understanding JavaScript's asynchronous behavior.",
-        "Use Promises to handle asynchronous operations in JavaScript.",
-        "Async/Await simplifies working with asynchronous code.",
-        "Hoisting can affect variable and function declarations in JavaScript.",
+        "Understand closures: Functions within functions and their scope.",
+        "The event loop is crucial in handling asynchronous tasks.",
+        "Learn about promises and how they work with async code.",
+        "Async/Await helps with clean asynchronous code without callbacks.",
+        "Be mindful of hoisting in JavaScript for variable declarations and function definitions.",
       ];
     } else if (lowerCaseQuestion.includes("array")) {
       return [
-        "Common sorting algorithms include Quicksort, Mergesort, and Bubble sort.",
-        "Binary search works efficiently on sorted arrays and reduces time complexity to O(log n).",
-        "Hash Maps allow for fast lookups and can be helpful with array problems.",
-        "The two-pointer technique is useful for problems like reversing arrays or finding pairs.",
+        "Sorting algorithms like QuickSort and MergeSort have different time complexities.",
+        "Binary search is efficient on sorted arrays; remember to check for the middle element.",
+        "A Hash Map helps to store key-value pairs for quick lookups in O(1) time.",
+        "The two-pointer technique is great for problems like finding pairs that sum to a target.",
       ];
     } else if (lowerCaseQuestion.includes("linked list")) {
       return [
-        "Pointers are essential when working with linked lists.",
-        "Linked lists can be traversed in a linear fashion, but reversing requires extra steps.",
-        "Detect cycles in a linked list using Floyd's Tortoise and Hare algorithm.",
-        "For efficient memory usage, you can use singly linked lists, but doubly linked lists offer more flexibility.",
+        "Pointers are critical in linked lists. Ensure proper manipulation to avoid errors.",
+        "To reverse a linked list, keep track of the previous node while traversing.",
+        "Detecting cycles in a linked list can be done using Floyd's Tortoise and Hare algorithm.",
+        "Doubly linked lists allow for easier backward traversal but require more memory.",
       ];
     } else if (lowerCaseQuestion.includes("tree")) {
       return [
-        "DFS (Depth-First Search) and BFS (Breadth-First Search) are key traversal methods.",
-        "Binary Search Trees (BST) ensure efficient searching by maintaining sorted order.",
-        "Balanced trees (AVL or Red-Black trees) keep operations like insertion and deletion efficient.",
-        "The height of a tree is crucial for determining the time complexity of various operations.",
+        "DFS is good for exploring as far down a branch as possible before backtracking.",
+        "BFS explores level by level, which is useful for finding the shortest path in unweighted graphs.",
+        "A Binary Search Tree allows for faster searches, insertions, and deletions.",
+        "Balance the tree to avoid skewed structure that could degrade performance.",
       ];
     } else if (lowerCaseQuestion.includes("recursion")) {
       return [
-        "Ensure you have a clear base case to prevent infinite recursion.",
-        "Deep recursion can lead to stack overflow errors, so be cautious with large inputs.",
-        "Memoization can optimize recursive functions by storing previously computed results.",
-        "Think of recursion as breaking a problem into smaller subproblems that resemble the original.",
+        "Identify the base case: without it, recursion could result in infinite loops.",
+        "Stack overflow happens when the recursion goes too deep without a base case.",
+        "Memoization stores previously computed results, speeding up recursive functions.",
+        "Think of recursion as dividing a problem into smaller subproblems that are easier to solve.",
       ];
     } else if (lowerCaseQuestion.includes("time complexity")) {
       return [
-        "Big O notation describes the upper bound of an algorithm's time complexity.",
-        "Remember to analyze both the worst-case and best-case complexities.",
-        "Consider space complexity alongside time complexity for more efficient solutions.",
-        "Common complexities include O(1), O(log n), O(n), and O(n log n).",
+        "Big O notation represents the upper bound of an algorithm's performance.",
+        "O(n) means the algorithm's time grows linearly with input size.",
+        "O(log n) is faster than O(n) for large inputs. It’s often seen in binary search.",
+        "Consider both time and space complexity to optimize your solution.",
       ];
     }
 
     // Add fallback generic hints if no specific match is found
     return [
-      "Try to break down the problem into smaller parts.",
-      "Focus on edge cases; they often break simple solutions.",
-      "Consider using a brute-force approach to identify patterns.",
-      "Think about how you can optimize the solution after solving the basic problem.",
+      "Break the problem down into smaller steps. This simplifies complex problems.",
+      "Always test your solution with edge cases to ensure robustness.",
+      "Start with a brute-force approach, then look for optimization opportunities.",
+      "Look at the problem from different perspectives, it may reveal new solutions.",
     ];
   };
 
