@@ -415,18 +415,21 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   // Example hints based on common interview topics
   const getHintsForTopic = (question) => {
     if (!question) return [];
-    
-    if (question.includes("JavaScript")) {
+
+    // Lowercase the question for more flexible matching
+    const lowerCaseQuestion = question.toLowerCase();
+
+    if (lowerCaseQuestion.includes("javascript")) {
       return ["Closures", "Event Loop", "Promises", "Async/Await", "Hoisting"];
-    } else if (question.includes("Array")) {
+    } else if (lowerCaseQuestion.includes("array")) {
       return ["Sorting Algorithms", "Binary Search", "Hash Map", "Two Pointers"];
-    } else if (question.includes("Linked List")) {
+    } else if (lowerCaseQuestion.includes("linked list")) {
       return ["Pointers", "Traversal", "Reversal", "Cycle Detection"];
-    } else if (question.includes("Tree")) {
+    } else if (lowerCaseQuestion.includes("tree")) {
       return ["DFS", "BFS", "Binary Search Tree", "Balanced Tree", "Height of Tree"];
-    } else if (question.includes("Recursion")) {
+    } else if (lowerCaseQuestion.includes("recursion")) {
       return ["Base Case", "Recursive Call", "Stack Overflow", "Memoization"];
-    } else if (question.includes("Time Complexity")) {
+    } else if (lowerCaseQuestion.includes("time complexity")) {
       return ["Big O Notation", "Worst Case", "Best Case", "Space Complexity"];
     }
     return []; // Return empty array if no match is found
