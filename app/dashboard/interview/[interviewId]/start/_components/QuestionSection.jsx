@@ -200,7 +200,7 @@ import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
-  const [showHint, setShowHint] = useState(false); // State to toggle hint dropdown
+  const [showHint, setShowHint] = useState(false); // State to manage hint visibility
 
   const textToSpeech = (text) => {
     if ("speechSynthesis" in window) {
@@ -220,7 +220,7 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   }, [mockInterviewQuestion, activeQuestionIndex]);
 
   const toggleHint = () => {
-    setShowHint((prev) => !prev); // Toggle the hint state
+    setShowHint((prevState) => !prevState);
   };
 
   return (
@@ -243,25 +243,31 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
+
+        {/* Sound Button */}
         <Volume2
           className="cursor-pointer"
           onClick={() =>
             textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
           }
         />
+
+        {/* Hint Section */}
         <div className="border rounded-lg p-5 bg-blue-100 mt-18">
-          {/* Hint Section */}
-          <div className="flex items-center gap-2 text-blue-800">
+          <div className="flex items-center gap-2">
+            {/* Yellow Bulb Icon */}
             <Lightbulb
               className="text-yellow-500 cursor-pointer"
-              onClick={toggleHint} // Toggle dropdown on click
+              onClick={toggleHint}
             />
-            <strong>Hint</strong>
+            <span className="font-medium text-blue-800">Hint</span>
           </div>
+
+          {/* Dropdown for Hints */}
           {showHint && (
             <div className="mt-2 p-3 bg-white border rounded shadow-md">
               <ul className="text-sm">
-                {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+                {mockInterviewQuestion[activeQuestionIndex]?.Keywords?.map(
                   (keyword, index) => (
                     <li key={index} className="text-gray-700">
                       {keyword}
@@ -278,4 +284,3 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
 };
 
 export default QuestionSection;
-
