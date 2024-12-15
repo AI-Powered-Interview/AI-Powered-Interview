@@ -218,7 +218,28 @@
 import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
+// Mock Data: Array with questions and keywords
+const mockInterviewQuestion = [
+  {
+    Question: "What is React?",
+    Keywords: ["Library", "JavaScript", "UI", "Components"],
+  },
+  {
+    Question: "What is Redux?",
+    Keywords: ["State", "Management", "Store", "Actions"],
+  },
+  {
+    Question: "What is Node.js?",
+    Keywords: ["Runtime", "JavaScript", "Server-side", "Non-blocking"],
+  },
+  {
+    Question: "Explain REST APIs.",
+    Keywords: ["HTTP", "Stateless", "CRUD", "Endpoints"],
+  },
+];
+
+const QuestionSection = () => {
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
   const textToSpeech = (text) => {
@@ -230,29 +251,32 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     }
   };
 
+  // Automatically speak the question when it becomes visible
   useEffect(() => {
-    console.log("Active Question Index:", activeQuestionIndex); // Debug Index
-    console.log(
-      "Active Question Object:",
-      mockInterviewQuestion[activeQuestionIndex]
-    ); // Debug Question Object
     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
     }
-    setShowHint(false); // Close the hint dropdown when question changes
-  }, [mockInterviewQuestion, activeQuestionIndex]);
+    setShowHint(false); // Close the hint dropdown when the question changes
+  }, [activeQuestionIndex]);
 
-  const toggleHint = (event) => {
-    event.preventDefault(); // Prevent any unintended navigation
-    console.log("Toggling Hint Visibility:", !showHint); // Debug Hint Toggle
-    setShowHint((prev) => !prev);
+  const toggleHint = () => {
+    setShowHint(!showHint);
+  };
+
+  // Handle Next Question
+  const handleNextQuestion = () => {
+    setActiveQuestionIndex((prevIndex) => {
+      // If we're at the last question, go back to the first
+      if (prevIndex === mockInterviewQuestion.length - 1) {
+        return 0;
+      }
+      return prevIndex + 1;
+    });
   };
 
   return (
-    mockInterviewQuestion &&
-    mockInterviewQuestion[activeQuestionIndex] && ( // Ensure Question Exists
+    mockInterviewQuestion && (
       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
-        {/* Question Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {mockInterviewQuestion.map((question, index) => (
             <h2
@@ -268,13 +292,11 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
           ))}
         </div>
 
-        {/* Question Display */}
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
 
-        {/* Hint and Audio Section */}
-        <div className="flex items-center gap-3 relative">
+        <div className="flex items-center gap-3">
           {/* Sound Icon */}
           <Volume2
             className="cursor-pointer"
@@ -282,33 +304,41 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
               textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
             }
           />
-          {/* Hint Lightbulb */}
-          <div
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={toggleHint}
-          >
-            <Lightbulb className="text-yellow-500" />
-            <span className="text-sm font-medium">Hint</span>
-          </div>
 
-          {/* Hint Dropdown */}
-          {showHint && (
+          {/* Hint Lightbulb */}
+          <div className="relative">
             <div
-              className="absolute top-full left-0 mt-2 p-3 bg-white border rounded shadow-md z-10"
-              style={{ minWidth: "150px" }}
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={toggleHint}
             >
-              <ul className="text-sm">
-                {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
-                  (keyword, index) => (
-                    <li key={index} className="text-gray-700">
-                      {keyword}
-                    </li>
-                  )
-                )}
-              </ul>
+              <Lightbulb
+                className={`text-yellow-500 ${showHint ? "text-yellow-500" : ""}`}
+              />
+              <span className="text-sm font-medium">Hint</span>
             </div>
-          )}
+            {showHint && (
+              <div className="absolute top-full left-0 mt-2 p-3 bg-white border rounded shadow-md z-10">
+                <ul className="text-sm">
+                  {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+                    (keyword, index) => (
+                      <li key={index} className="text-gray-700">
+                        {keyword}
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Next Question Button */}
+        <button
+          className="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md"
+          onClick={handleNextQuestion}
+        >
+          Next Question
+        </button>
       </div>
     )
   );
