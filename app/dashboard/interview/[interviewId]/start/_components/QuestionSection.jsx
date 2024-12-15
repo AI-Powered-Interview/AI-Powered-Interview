@@ -116,10 +116,110 @@
 
 // export default QuestionSection;
 
+
+
+// import { Lightbulb, Volume2 } from "lucide-react";
+// import React, { useEffect, useState } from "react";
+
+// const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) => {
+//   const [showHint, setShowHint] = useState(false);
+
+//   const textToSpeech = (text) => {
+//     if ("speechSynthesis" in window) {
+//       const speech = new SpeechSynthesisUtterance(text);
+//       window.speechSynthesis.speak(speech);
+//     } else {
+//       alert("Sorry, your browser does not support text to speech.");
+//     }
+//   };
+
+//   // Automatically speak the question when it becomes visible
+//   useEffect(() => {
+//     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
+//       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
+//     }
+//     setShowHint(false); // Close the hint dropdown when the question changes
+//   }, [mockInterviewQuestion, activeQuestionIndex]);
+
+//   const toggleHint = () => {
+//     setShowHint(!showHint);
+//   };
+
+//   const handleNextQuestion = () => {
+//     setActiveQuestionIndex((prevIndex) =>
+//       prevIndex === mockInterviewQuestion.length - 1 ? 0 : prevIndex + 1
+//     );
+//   };
+
+//   return (
+//     mockInterviewQuestion && (
+//       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
+//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+//           {mockInterviewQuestion.map((question, index) => (
+//             <h2
+//               key={index}
+//               className={`p-2 rounded-full text-center text-xs md:text-sm cursor-pointer md:block hidden ${
+//                 activeQuestionIndex === index
+//                   ? "bg-black text-white"
+//                   : "bg-secondary"
+//               }`}
+//             >
+//               Question #{index + 1}
+//             </h2>
+//           ))}
+//         </div>
+//         <h2 className="my-5 text-md md:text-lg">
+//           {mockInterviewQuestion[activeQuestionIndex]?.Question}
+//         </h2>
+//         <div className="flex items-center gap-3">
+//           {/* Sound Icon */}
+//           <Volume2
+//             className="cursor-pointer"
+//             onClick={() =>
+//               textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
+//             }
+//           />
+//           {/* Hint Lightbulb */}
+//           <div className="relative">
+//             <div
+//               className="flex items-center gap-2 cursor-pointer"
+//               onClick={toggleHint}
+//             >
+//               <Lightbulb className={`text-yellow-500 ${showHint ? "text-yellow-500" : ""}`} />
+//               <span className="text-sm font-medium">Hint</span>
+//             </div>
+//             {showHint && (
+//               <div className="absolute top-full left-0 mt-2 p-3 bg-white border rounded shadow-md z-10">
+//                 <ul className="text-sm">
+//                   {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+//                     (keyword, index) => (
+//                       <li key={index} className="text-gray-700">
+//                         {keyword}
+//                       </li>
+//                     )
+//                   )}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//         <button
+//           className="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md"
+//           onClick={handleNextQuestion}
+//         >
+//           Next Question
+//         </button>
+//       </div>
+//     )
+//   );
+// };
+
+// export default QuestionSection;
+
 import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) => {
+const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   const [showHint, setShowHint] = useState(false);
 
   const textToSpeech = (text) => {
@@ -141,12 +241,6 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex, setActive
 
   const toggleHint = () => {
     setShowHint(!showHint);
-  };
-
-  const handleNextQuestion = () => {
-    setActiveQuestionIndex((prevIndex) =>
-      prevIndex === mockInterviewQuestion.length - 1 ? 0 : prevIndex + 1
-    );
   };
 
   return (
@@ -201,18 +295,13 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex, setActive
             )}
           </div>
         </div>
-        <button
-          className="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md"
-          onClick={handleNextQuestion}
-        >
-          Next Question
-        </button>
       </div>
     )
   );
 };
 
 export default QuestionSection;
+
 
 
  
