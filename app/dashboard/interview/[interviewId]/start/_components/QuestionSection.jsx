@@ -420,54 +420,55 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     // Return hints based on the keywords in the question
     if (lowerCaseQuestion.includes("javascript")) {
       return [
-        "Understand closures and lexical scoping",
-        "Learn about the event loop and call stack",
-        "Promises and Async/Await for handling async code",
-        "Remember the concept of hoisting in JavaScript",
+        "Closures help with managing function scope and state.",
+        "The event loop and call stack are fundamental to understanding JavaScript's asynchronous behavior.",
+        "Use Promises to handle asynchronous operations in JavaScript.",
+        "Async/Await simplifies working with asynchronous code.",
+        "Hoisting can affect variable and function declarations in JavaScript.",
       ];
     } else if (lowerCaseQuestion.includes("array")) {
       return [
-        "Explore common sorting algorithms like quicksort and mergesort",
-        "Understand binary search and how it works",
-        "Hash Maps can be useful for fast lookups",
-        "Two-pointer technique is effective for many problems",
+        "Common sorting algorithms include Quicksort, Mergesort, and Bubble sort.",
+        "Binary search works efficiently on sorted arrays and reduces time complexity to O(log n).",
+        "Hash Maps allow for fast lookups and can be helpful with array problems.",
+        "The two-pointer technique is useful for problems like reversing arrays or finding pairs.",
       ];
     } else if (lowerCaseQuestion.includes("linked list")) {
       return [
-        "Pointers are key to understanding linked lists",
-        "Traversing a linked list requires understanding pointers",
-        "Reversing a linked list is a common interview question",
-        "Detecting cycles in a linked list using Floyd's Tortoise and Hare",
+        "Pointers are essential when working with linked lists.",
+        "Linked lists can be traversed in a linear fashion, but reversing requires extra steps.",
+        "Detect cycles in a linked list using Floyd's Tortoise and Hare algorithm.",
+        "For efficient memory usage, you can use singly linked lists, but doubly linked lists offer more flexibility.",
       ];
     } else if (lowerCaseQuestion.includes("tree")) {
       return [
-        "Depth-First Search (DFS) and Breadth-First Search (BFS)",
-        "Understanding Binary Search Trees (BST)",
-        "Balanced trees like AVL or Red-Black Trees are important",
-        "Height of a tree and calculating it efficiently",
+        "DFS (Depth-First Search) and BFS (Breadth-First Search) are key traversal methods.",
+        "Binary Search Trees (BST) ensure efficient searching by maintaining sorted order.",
+        "Balanced trees (AVL or Red-Black trees) keep operations like insertion and deletion efficient.",
+        "The height of a tree is crucial for determining the time complexity of various operations.",
       ];
     } else if (lowerCaseQuestion.includes("recursion")) {
       return [
-        "Recursion is all about base case and recursive calls",
-        "Watch out for stack overflow errors in deep recursion",
-        "Memoization is an optimization technique for recursive solutions",
-        "Try to understand recursion through real-world problems",
+        "Ensure you have a clear base case to prevent infinite recursion.",
+        "Deep recursion can lead to stack overflow errors, so be cautious with large inputs.",
+        "Memoization can optimize recursive functions by storing previously computed results.",
+        "Think of recursion as breaking a problem into smaller subproblems that resemble the original.",
       ];
     } else if (lowerCaseQuestion.includes("time complexity")) {
       return [
-        "Big O notation helps to analyze the time complexity",
-        "Understand the worst-case, best-case, and average-case complexities",
-        "Don't forget about space complexity as well",
-        "Practice calculating the time complexity for common algorithms",
+        "Big O notation describes the upper bound of an algorithm's time complexity.",
+        "Remember to analyze both the worst-case and best-case complexities.",
+        "Consider space complexity alongside time complexity for more efficient solutions.",
+        "Common complexities include O(1), O(log n), O(n), and O(n log n).",
       ];
     }
 
     // Add fallback generic hints if no specific match is found
     return [
-      "Try breaking down the problem into smaller parts",
-      "Focus on edge cases, they can be tricky",
-      "Think about time and space complexity",
-      "Write out examples to better understand the problem",
+      "Try to break down the problem into smaller parts.",
+      "Focus on edge cases; they often break simple solutions.",
+      "Consider using a brute-force approach to identify patterns.",
+      "Think about how you can optimize the solution after solving the basic problem.",
     ];
   };
 
