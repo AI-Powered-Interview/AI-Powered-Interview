@@ -196,7 +196,9 @@ const QuestionSection = ({ activeQuestionIndex }) => {
               className="flex items-center gap-2 cursor-pointer"
               onClick={toggleHint}
             >
-              <Lightbulb className="text-yellow-500" />
+              <Lightbulb
+                className={`${showHint ? "text-yellow-500" : "text-gray-500"}`}
+              />
               <span className="text-sm font-medium">Hint</span>
             </div>
             {showHint && (
@@ -214,15 +216,6 @@ const QuestionSection = ({ activeQuestionIndex }) => {
             )}
           </div>
         </div>
-        <div className="border rounded-lg p-5 bg-blue-100 mt-18 md:block hidden">
-          <h2 className="flex gap-2 items-center text-blue-800">
-            <Lightbulb />
-            <strong>Note:</strong>
-          </h2>
-          <h2 className="text-sm text-blue-600 my-2">
-            {process.env.NEXT_PUBLIC_QUESTION_NOTE}
-          </h2>
-        </div>
       </div>
     )
   );
@@ -234,4 +227,3 @@ const App = () => {
 };
 
 export default App;
-
