@@ -115,7 +115,6 @@
 // };
 
 // export default QuestionSection;
-
 import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -156,6 +155,7 @@ const QuestionSection = ({ activeQuestionIndex }) => {
     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
     }
+    setShowHint(false); // Close the hint dropdown when the question changes
   }, [activeQuestionIndex]);
 
   const toggleHint = () => {
@@ -183,12 +183,14 @@ const QuestionSection = ({ activeQuestionIndex }) => {
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
         <div className="flex items-center gap-3">
+          {/* Sound Icon */}
           <Volume2
             className="cursor-pointer"
             onClick={() =>
               textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
             }
           />
+          {/* Hint Lightbulb */}
           <div className="relative">
             <div
               className="flex items-center gap-2 cursor-pointer"
@@ -232,3 +234,4 @@ const App = () => {
 };
 
 export default App;
+
