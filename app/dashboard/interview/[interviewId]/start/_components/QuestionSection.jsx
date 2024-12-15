@@ -138,7 +138,8 @@ const mockInterviewQuestion = [
   },
 ];
 
-const QuestionSection = ({ activeQuestionIndex }) => {
+const QuestionSection = () => {
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
   const textToSpeech = (text) => {
@@ -160,6 +161,17 @@ const QuestionSection = ({ activeQuestionIndex }) => {
 
   const toggleHint = () => {
     setShowHint(!showHint);
+  };
+
+  // Handle Next Question
+  const handleNextQuestion = () => {
+    setActiveQuestionIndex((prevIndex) => {
+      // If we're at the last question, go back to the first
+      if (prevIndex === mockInterviewQuestion.length - 1) {
+        return 0;
+      }
+      return prevIndex + 1;
+    });
   };
 
   return (
@@ -219,14 +231,17 @@ const QuestionSection = ({ activeQuestionIndex }) => {
             )}
           </div>
         </div>
+
+        {/* Next Question Button */}
+        <button
+          className="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md"
+          onClick={handleNextQuestion}
+        >
+          Next Question
+        </button>
       </div>
     )
   );
 };
 
-// Example usage: Pass the activeQuestionIndex as a prop
-const App = () => {
-  return <QuestionSection activeQuestionIndex={0} />;
-};
-
-export default App;
+export default QuestionSection;
