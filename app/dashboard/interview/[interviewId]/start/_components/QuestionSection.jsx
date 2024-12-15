@@ -195,7 +195,3 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
 };
 
 export default QuestionSection;
-
-
-
-
