@@ -54,10 +54,75 @@
 
 
 
+// import { Lightbulb, Volume2 } from "lucide-react";
+// import React, { useEffect } from "react";
+
+// const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
+//   const textToSpeech = (text) => {
+//     if ("speechSynthesis" in window) {
+//       const speech = new SpeechSynthesisUtterance(text);
+//       window.speechSynthesis.speak(speech);
+//     } else {
+//       alert("Sorry, your browser does not support text to speech.");
+//     }
+//   };
+
+//   // Automatically speak the question when it becomes visible
+//   useEffect(() => {
+//     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
+//       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
+//     }
+//   }, [mockInterviewQuestion, activeQuestionIndex]);
+
+//   return (
+//     mockInterviewQuestion && (
+//       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
+//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+//           {mockInterviewQuestion.map((question, index) => (
+//             <h2
+//               key={index}
+//               className={`p-2 rounded-full text-center text-xs md:text-sm cursor-pointer md:block hidden ${
+//                 activeQuestionIndex === index
+//                   ? "bg-black text-white"
+//                   : "bg-secondary"
+//               }`}
+//             >
+//               Question #{index + 1}
+//             </h2>
+//           ))}
+//         </div>
+//         <h2 className="my-5 text-md md:text-lg">
+//           {mockInterviewQuestion[activeQuestionIndex]?.Question}
+//         </h2>
+//         <Volume2
+//           className="cursor-pointer"
+//           onClick={() =>
+//             textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
+//           }
+//         />
+//         <div className="border rounded-lg p-5 bg-blue-100 mt-18 md:block hidden">
+//           <h2 className="flex gap-2 items-center text-blue-800">
+//             <Lightbulb />
+//             <strong>Note:</strong>
+//           </h2>
+//           <h2 className="text-sm text-blue-600 my-2">
+//             {process.env.NEXT_PUBLIC_QUESTION_NOTE}
+//           </h2>
+//         </div>
+//       </div>
+//     )
+//   );
+// };
+
+// export default QuestionSection;
+
+
 import { Lightbulb, Volume2 } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
+  const [isRecording, setIsRecording] = useState(false); // State to manage recording status
+
   const textToSpeech = (text) => {
     if ("speechSynthesis" in window) {
       const speech = new SpeechSynthesisUtterance(text);
@@ -73,6 +138,18 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
     }
   }, [mockInterviewQuestion, activeQuestionIndex]);
+
+  // Handle "Record Answer" button click
+  const handleRecordAnswer = () => {
+    setIsRecording((prev) => !prev); // Toggle recording state
+    if (!isRecording) {
+      // Start recording logic here
+      console.log("Recording started...");
+    } else {
+      // Stop recording logic here
+      console.log("Recording stopped...");
+    }
+  };
 
   return (
     mockInterviewQuestion && (
@@ -94,12 +171,23 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
+
+        {/* Volume Button for Text-to-Speech */}
         <Volume2
           className="cursor-pointer"
           onClick={() =>
             textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
           }
         />
+
+        {/* "Record Answer" Button */}
+        <button
+          className={`mt-5 px-5 py-2 text-white rounded-md ${isRecording ? "bg-red-500" : "bg-black"}`}
+          onClick={handleRecordAnswer}
+        >
+          {isRecording ? "Stop Recording" : "Record Answer"}
+        </button>
+
         <div className="border rounded-lg p-5 bg-blue-100 mt-18 md:block hidden">
           <h2 className="flex gap-2 items-center text-blue-800">
             <Lightbulb />
