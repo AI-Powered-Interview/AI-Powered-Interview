@@ -120,7 +120,7 @@ import { Lightbulb, Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
-  const [showHint, setShowHint] = useState(false); // State to toggle hint dropdown
+  const [showHint, setShowHint] = useState(false); // State to manage hint visibility
 
   const textToSpeech = (text) => {
     if ("speechSynthesis" in window) {
@@ -134,10 +134,14 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   // Automatically speak the question when it becomes visible
   useEffect(() => {
     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
-      textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
+      textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question);
     }
     setShowHint(false); // Close the hint dropdown when the question changes
   }, [mockInterviewQuestion, activeQuestionIndex]);
+
+  const toggleHint = () => {
+    setShowHint((prevState) => !prevState);
+  };
 
   return (
     mockInterviewQuestion && (
@@ -146,11 +150,11 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
           {mockInterviewQuestion.map((question, index) => (
             <h2
               key={index}
-              className={`p-2 rounded-full text-center text-xs md:text-sm cursor-pointer md:block hidden ${
+              className={p-2 rounded-full text-center text-xs md:text-sm cursor-pointer md:block hidden ${
                 activeQuestionIndex === index
                   ? "bg-black text-white"
                   : "bg-secondary"
-              }`}
+              }}
             >
               Question #{index + 1}
             </h2>
@@ -159,31 +163,40 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
+
+        {/* Sound Button */}
         <Volume2
           className="cursor-pointer"
           onClick={() =>
             textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
           }
         />
+
+        {/* Hint Section */}
         <div className="border rounded-lg p-5 bg-blue-100 mt-18">
-          <div className="flex items-center gap-2 text-blue-800">
-            {/* Yellow Lightbulb Icon */}
+          <div className="flex items-center gap-2">
+            {/* Yellow Bulb Icon */}
             <Lightbulb
               className="text-yellow-500 cursor-pointer"
-              onClick={() => setShowHint(!showHint)} // Toggle dropdown
+              onClick={toggleHint}
             />
-            <strong>Hint</strong>
+            <span className="font-medium text-blue-800">Hint</span>
           </div>
-          {/* Hint Dropdown */}
+
+          {/* Dropdown for Hints */}
           {showHint && (
             <div className="mt-2 p-3 bg-white border rounded shadow-md">
               <ul className="text-sm">
-                {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
-                  (keyword, index) => (
-                    <li key={index} className="text-gray-700">
-                      {keyword}
-                    </li>
+                {mockInterviewQuestion[activeQuestionIndex]?.Keywords?.length > 0 ? (
+                  mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+                    (keyword, index) => (
+                      <li key={index} className="text-gray-700">
+                        {keyword}
+                      </li>
+                    )
                   )
+                ) : (
+                  <li className="text-gray-700">No hints available for this question.</li>
                 )}
               </ul>
             </div>
