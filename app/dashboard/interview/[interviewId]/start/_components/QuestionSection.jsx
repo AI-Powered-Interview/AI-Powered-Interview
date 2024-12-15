@@ -230,21 +230,27 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     }
   };
 
-  // Automatically speak the question when it becomes visible
   useEffect(() => {
+    console.log("Active Question Index:", activeQuestionIndex); // Debug Index
+    console.log(
+      "Active Question Object:",
+      mockInterviewQuestion[activeQuestionIndex]
+    ); // Debug Question Object
     if (mockInterviewQuestion && mockInterviewQuestion[activeQuestionIndex]) {
       textToSpeech(mockInterviewQuestion[activeQuestionIndex].Question);
     }
-    setShowHint(false); // Close the hint dropdown when the question changes
+    setShowHint(false); // Close the hint dropdown when question changes
   }, [mockInterviewQuestion, activeQuestionIndex]);
 
   const toggleHint = (event) => {
     event.preventDefault(); // Prevent any unintended navigation
-    setShowHint((prev) => !prev); // Toggle hint visibility
+    console.log("Toggling Hint Visibility:", !showHint); // Debug Hint Toggle
+    setShowHint((prev) => !prev);
   };
 
   return (
-    mockInterviewQuestion && (
+    mockInterviewQuestion &&
+    mockInterviewQuestion[activeQuestionIndex] && ( // Ensure Question Exists
       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
         {/* Question Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
