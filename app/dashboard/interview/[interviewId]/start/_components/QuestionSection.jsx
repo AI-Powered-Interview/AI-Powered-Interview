@@ -179,9 +179,11 @@ const QuestionSection = ({ activeQuestionIndex }) => {
             </h2>
           ))}
         </div>
+
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
+
         <div className="flex items-center gap-3">
           {/* Sound Icon */}
           <Volume2
@@ -190,6 +192,7 @@ const QuestionSection = ({ activeQuestionIndex }) => {
               textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.Question)
             }
           />
+
           {/* Hint Lightbulb */}
           <div className="relative">
             <div
@@ -197,7 +200,7 @@ const QuestionSection = ({ activeQuestionIndex }) => {
               onClick={toggleHint}
             >
               <Lightbulb
-                className={`${showHint ? "text-yellow-500" : "text-gray-500"}`}
+                className={`text-yellow-500 ${showHint ? "text-yellow-500" : ""}`}
               />
               <span className="text-sm font-medium">Hint</span>
             </div>
