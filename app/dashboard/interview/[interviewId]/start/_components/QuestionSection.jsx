@@ -411,13 +411,13 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     setShowHint((prevState) => !prevState);
   };
 
-  // Example hints based on common interview topics
+  // Enhanced Hints based on topics
   const getHintsForTopic = (question) => {
     if (!question) return [];
 
-    // Lowercase the question for more flexible matching
     const lowerCaseQuestion = question.toLowerCase();
 
+    // Return hints based on the keywords in the question
     if (lowerCaseQuestion.includes("javascript")) {
       return ["Closures", "Event Loop", "Promises", "Async/Await", "Hoisting"];
     } else if (lowerCaseQuestion.includes("array")) {
@@ -431,7 +431,9 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
     } else if (lowerCaseQuestion.includes("time complexity")) {
       return ["Big O Notation", "Worst Case", "Best Case", "Space Complexity"];
     }
-    return []; // Return empty array if no match is found
+
+    // Add fallback generic hints if no specific match is found
+    return ["Try to break down the problem into smaller steps", "Focus on edge cases", "Think about time and space complexity"];
   };
 
   return (
@@ -481,17 +483,11 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
                 {/* Display hints for the active question */}
                 {getHintsForTopic(
                   mockInterviewQuestion[activeQuestionIndex]?.Question
-                ).length > 0 ? (
-                  getHintsForTopic(
-                    mockInterviewQuestion[activeQuestionIndex]?.Question
-                  ).map((hint, index) => (
-                    <li key={index} className="text-gray-700">
-                      {hint}
-                    </li>
-                  ))
-                ) : (
-                  <li className="text-gray-700">No hints available for this question.</li>
-                )}
+                ).map((hint, index) => (
+                  <li key={index} className="text-gray-700">
+                    {hint}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
