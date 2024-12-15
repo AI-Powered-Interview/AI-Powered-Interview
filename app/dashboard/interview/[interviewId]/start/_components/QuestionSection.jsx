@@ -246,6 +246,7 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   return (
     mockInterviewQuestion && (
       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
+        {/* Question Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {mockInterviewQuestion.map((question, index) => (
             <h2
@@ -260,10 +261,14 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
             </h2>
           ))}
         </div>
+
+        {/* Question Display */}
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
-        <div className="flex items-center gap-3">
+
+        {/* Hint and Audio Section */}
+        <div className="flex items-center gap-3 relative">
           {/* Sound Icon */}
           <Volume2
             className="cursor-pointer"
@@ -272,28 +277,28 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
             }
           />
           {/* Hint Lightbulb */}
-          <div className="relative">
-            <div
-              className="flex items-center gap-2 cursor-pointer"
-              onClick={toggleHint}
-            >
-              <Lightbulb className={`text-yellow-500 ${showHint ? "text-yellow-500" : ""}`} />
-              <span className="text-sm font-medium">Hint</span>
-            </div>
-            {showHint && (
-              <div className="absolute top-full left-0 mt-2 p-3 bg-white border rounded shadow-md z-10">
-                <ul className="text-sm">
-                  {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
-                    (keyword, index) => (
-                      <li key={index} className="text-gray-700">
-                        {keyword}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-            )}
+          <div className="flex items-center gap-2 cursor-pointer" onClick={toggleHint}>
+            <Lightbulb className="text-yellow-500" />
+            <span className="text-sm font-medium">Hint</span>
           </div>
+
+          {/* Hint Dropdown */}
+          {showHint && (
+            <div
+              className="absolute top-full left-0 mt-2 p-3 bg-white border rounded shadow-md z-10"
+              style={{ minWidth: "150px" }}
+            >
+              <ul className="text-sm">
+                {mockInterviewQuestion[activeQuestionIndex]?.Keywords.map(
+                  (keyword, index) => (
+                    <li key={index} className="text-gray-700">
+                      {keyword}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     )
@@ -301,7 +306,3 @@ const QuestionSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
 };
 
 export default QuestionSection;
-
-
-
- 
