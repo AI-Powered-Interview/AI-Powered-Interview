@@ -277,6 +277,7 @@ const QuestionSection = () => {
   return (
     mockInterviewQuestion && (
       <div className="flex flex-col justify-between p-5 border rounded-lg my-1 bg-secondary">
+        {/* Question Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {mockInterviewQuestion.map((question, index) => (
             <h2
@@ -286,16 +287,19 @@ const QuestionSection = () => {
                   ? "bg-black text-white"
                   : "bg-secondary"
               }`}
+              onClick={handleNextQuestion} // Assign functionality here
             >
               Question #{index + 1}
             </h2>
           ))}
         </div>
 
+        {/* Display Current Question */}
         <h2 className="my-5 text-md md:text-lg">
           {mockInterviewQuestion[activeQuestionIndex]?.Question}
         </h2>
 
+        {/* Hint and Audio Section */}
         <div className="flex items-center gap-3">
           {/* Sound Icon */}
           <Volume2
@@ -331,14 +335,6 @@ const QuestionSection = () => {
             )}
           </div>
         </div>
-
-        {/* Next Question Button */}
-        <button
-          className="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md"
-          onClick={handleNextQuestion}
-        >
-          Next Question
-        </button>
       </div>
     )
   );
